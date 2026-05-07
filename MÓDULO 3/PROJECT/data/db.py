@@ -1,6 +1,6 @@
 import sqlite3
 
-dbbase = (r"C:\Users\vikto\OneDrive\Documentos\SQLITE\cinex.db")
+dbbase = ("cinex.db")
 
 def get_connection():
    try:
