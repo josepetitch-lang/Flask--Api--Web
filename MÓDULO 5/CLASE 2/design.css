@@ -1,0 +1,25 @@
+body {
+    background-color: #cc0000;
+}
+
+p{
+    color : #f0f0f0;
+    font-family: Arial, sans-serif;
+    font-style: italic;
+}
+
+footer {
+    color : #CCFF00;
+    text-align : center;
+}
+
+section {
+    background-color: #cc0000;
+    font-family: Arial, sans-serif;
+    font-style: Italic;
+}
+
+
+h1{
+    color: #333;
+}
