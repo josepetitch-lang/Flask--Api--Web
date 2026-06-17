@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Flask Endpoints y Rutas</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background-color: #0f172a; color: #e2e8f0; padding: 40px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        h1 { color: #f43f5e; }
+        a { color: #38bdf8; text-decoration: none; }
+        pre { background-color: #1e293b; padding: 15px; border-radius: 6px; border: 1px solid #334155; overflow-x: auto; color: #f8fafc; }
+        .badge { background-color: #475569; padding: 4px 8px; border-radius: 4px; font-size: 0.85em; font-weight: bold; }
+        .get { background-color: #047857; }
+        .post { background-color: #b91c1c; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p><a href="index_docs.html">← Volver al Índice</a></p>
+        <h1>Construcción de Endpoints en Flask</h1>
+        <p>Para interactuar como una API, Flask debe retornar diccionarios de Python, los cuales son serializados automáticamente a formato JSON.</p>
+        
+        <h2>Ejemplo Técnico Básicos:</h2>
+        <pre><code>from flask import Flask, jsonify, request
+
+app = Flask(__name__)
+
+# <span class="badge get">GET</span> Obtener información
+@app.route('/api/usuario', methods=['GET'])
+def obtener_usuario():
+    datos = {"nombre": "Andrew", "rol": "Developer"}
+    return jsonify(datos), 200
+
+# <span class="badge post">POST</span> Crear o enviar información
+@app.route('/api/usuario', methods=['POST'])
+def crear_usuario():
+    info_recibida = request.json
+    return jsonify({"mensaje": "Usuario creado", "data": info_recibida}), 201
+
+if __name__ == '__main__':
+    app.run(debug=True)</code></pre>
+    </div>
+</body>
+</html>

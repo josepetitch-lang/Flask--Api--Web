@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Documentation - Core Services</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-get: #10b981;
+            --accent-post: #3b82f6;
+            --code-bg: #020617;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            border-bottom: 2px solid var(--card-bg);
+            padding-bottom: 1rem;
+            font-size: 2.5rem;
+        }
+
+        .description {
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+        }
+
+        .endpoint-card {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-right: 1rem;
+        }
+
+        .badge-get { background-color: rgba(16, 185, 129, 0.2); color: var(--accent-get); }
+        .badge-post { background-color: rgba(59, 130, 246, 0.2); color: var(--accent-post); }
+
+        .route {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            padding: 1rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            border: 1px solid #334155;
+        }
+
+        code {
+            font-family: 'Fira Code', Consolas, Monaco, monospace;
+            color: #f1f5f9;
+        }
+
+        .params-title {
+            margin-top: 1rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Flask API Documentation</h1>
+        <p class="description">Guía de referencia rápida para interactuar con los endpoints del backend desde JavaScript.</p>
+
+        <div class="endpoint-card">
+            <div>
+                <span class="badge badge-get">GET</span>
+                <span class="route">/api/v1/status</span>
+            </div>
+            <p>Retorna el estado actual del servidor y la sincronización del sistema.</p>
+            
+            <div class="params-title">Respuesta Exitosa (JSON):</div>
+            <pre><code>{
+    "status": "online",
+    "timestamp": 1718568000,
+    "version": "1.0.2"
+}</code></pre>
+        </div>
+
+        <div class="endpoint-card">
+            <div>
+                <span class="badge badge-post">POST</span>
+                <span class="route">/api/v1/action</span>
+            </div>
+            <p>Envía datos estructurados para procesar una nueva transacción o publicación.</p>
+            
+            <div class="params-title">Cuerpo de la Petición (Required JSON):</div>
+            <pre><code>{
+    "user_id": "panas_07",
+    "type": "standard",
+    "payload": {
+        "score": 2400
+    }
+}</code></pre>
+
+            <div class="params-title">Respuesta Exitosa (JSON - 201 Created):</div>
+            <pre><code>{
+    "success": true,
+    "message": "Registro procesado correctamente",
+    "id": "TX-99821"
+}</code></pre>
+        </div>
+    </div>
+
+</body>
+</html>

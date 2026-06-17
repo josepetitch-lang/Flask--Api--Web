@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Consumo de APIs con JS Fetch</title>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background-color: #0f172a; color: #e2e8f0; padding: 40px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        h1 { color: #eab308; }
+        a { color: #38bdf8; text-decoration: none; }
+        pre { background-color: #1e293b; padding: 15px; border-radius: 6px; border: 1px solid #334155; overflow-x: auto; color: #67e8f9; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p><a href="index_docs.html">← Volver al Índice</a></p>
+        <h1>Consumo de APIs con JavaScript (Fetch API)</h1>
+        
+        <h2>Estructura de una Petición GET:</h2>
+        <pre><code>const url = 'http://127.0.0.1:5000/api/usuario';
+
+fetch(url)
+    .then(respuesta => {
+        if (!respuesta.ok) {
+            throw new Error('Error en la conexión con el servidor');
+        }
+        return respuesta.json(); // Convierte la respuesta JSON a objeto JS
+    })
+    .then(data => {
+        console.log('Datos del backend:', data);
+        // Aquí manipulas el HTML (DOM) para mostrar los datos en pantalla
+        document.getElementById('nombre').innerText = data.nombre;
+    })
+    .catch(error => {
+        console.error('Hubo un problema con la petición:', error);
+    });</code></pre>
+    </div>
+</body>
+</html>

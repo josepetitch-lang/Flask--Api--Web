@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentación Personal: Python Flask API</title>
+    <style>
+        :root {
+            --bg-color: #f8f9fa;
+            --sidebar-bg: #1e1e24;
+            --sidebar-text: #ffffff;
+            --text-color: #333333;
+            --accent-color: #007acc;
+            --code-bg: #2d3142;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+        }
+
+        /* Barra Lateral */
+        nav {
+            width: 280px;
+            background-color: var(--sidebar-bg);
+            color: var(--sidebar-text);
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow-y: auto;
+            padding: 20px 10px;
+            box-sizing: border-box;
+        }
+
+        nav h2 {
+            text-align: center;
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+            color: #4fbcff;
+            border-bottom: 1px solid #3a3a43;
+            padding-bottom: 10px;
+        }
+
+        nav a {
+            display: block;
+            color: #b8b8c0;
+            padding: 12px 15px;
+            text-decoration: none;
+            border-radius: 6px;
+            margin-bottom: 5px;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+
+        nav a:hover {
+            background-color: #2b2b36;
+            color: var(--sidebar-text);
+            padding-left: 20px;
+        }
+
+    
+        main {
+            margin-left: 280px;
+            padding: 40px;
+            max-width: 900px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #111;
+            margin-bottom: 10px;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            color: var(--accent-color);
+            margin-top: 40px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 8px;
+        }
+
+        p {
+            line-height: 1.6;
+            font-size: 1.05rem;
+        }
+
+       
+        pre {
+            background-color: var(--code-bg);
+            color: #f8f8f2;
+            padding: 18px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            line-height: 1.4;
+        }
+
+        code {
+            font-family: 'Consolas', monospace;
+            background-color: #e9ecef;
+            color: #d63384;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        pre code {
+            background-color: transparent;
+            color: inherit;
+            padding: 0;
+        }
+
+        .badge {
+            background-color: #28a745;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    
+    <nav>
+        <h2>Flask Docs</h2>
+        <a href="#entorno">1. Entorno Virtual</a>
+        <a href="#estructura">2. Servidor Mínimo</a>
+        <a href="#rutas">3. Manejo de Rutas</a>
+        <a href="#api">4. Respuestas JSON</a>
+        <a href="#migraciones">5. Flask-Migrate & DB</a>
+    </nav>
+
+    
+    <main>
+        <h1>Guía de Referencia Técnica: Flask</h1>
+        <p>Estructura modular optimizada para el desarrollo de microservicios y APIs estructuradas empleando Python.</p>
+        
+        <hr style="border: 0; height: 1px; background: #e2e8f0; margin: 30px 0;">
+
+        
+        <section id="entorno">
+            <h3>1. Inicialización del Entorno</h3>
+            <p>Antes de estructurar la aplicación, se debe garantizar el aislamiento de dependencias utilizando un entorno virtual limpio:</p>
+            <pre><code># Crear entorno virtual en la carpeta raíz
+python -m venv venv
+
+# Activar el entorno (
+venv\Scripts\activate
+
+# Instalación de dependencias core
+pip install Flask flask-migrate flask-sqlalchemy</code></pre>
+        </section>
+
+      
+        <section id="estructura">
+            <h3>2. Servidor Mínimo Estándar</h3>
+            <p>Estructura base para levantar un servidor de escucha local. El punto de entrada se inicializa instanciando la clase principal de Flask:</p>
+            <pre><code>from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "Servidor Flask corriendo correctamente."
+
+if __name__ == '__main__':
+    # Modo debug activo para recarga automática en desarrollo
+    app.run(debug=True, port=5000)</code></pre>
+        </section>
+
+        
+        <section id="rutas">
+            <h3>3. Enrutamiento Dinámico</h3>
+            <p>Flask mapea URLs a funciones mediante decoradores. Es posible capturar variables directamente desde la ruta especificando el tipo de dato requerido:</p>
+            <pre><code>@app.route('/usuario/&lt;int:user_id&gt;')
+def obtener_usuario(user_id):
+    return f"Buscando los registros asociados al ID numérico: {user_id}"</code></pre>
+        </section>
+
+       
+        <section id="api">
+            <h3>4. Construcción de Endpoints API (REST)</h3>
+            <p>Para comunicar servicios externos (por ejemplo, peticiones desde Postman o interfaces web), las respuestas se retornan serializadas en formato estructurado JSON:</p>
+            <pre><code>from flask import jsonify, request
+
+@app.route('/api/v1/recurso', methods=['POST'])
+def crear_recurso():
+    # Capturar el cuerpo de la petición HTTP recibida
+    datos = request.get_json()
+    
+    respuesta = {
+        "estado": "exitoso",
+        "mensaje": "Recurso procesado correctamente",
+        "datos_recibidos": datos
+    }
+    return jsonify(respuesta), 201</code></pre>
+        </section>
+
+      
+        <section id="migraciones">
+            <h3>5. Control de Base de Datos y Migraciones <span class="badge">PRO</span></h3>
+            <p>Manejo de persistencia relacional acoplando el ORM y la herramienta de control de versiones de bases de datos:</p>
+            <pre><code>from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
+
+db = SQLAlchemy(app)
+migrate = Migrate(app, db)
+
+# Comandos esenciales para la consola de desarrollo:
+# 1. flask db init       -> Crea la carpeta base de migraciones
+# 2. flask db migrate -m -> Detecta cambios en los modelos y genera el script
+# 3. flask db upgrade    -> Aplica los cambios estructurales en la BD real</code></pre>
+        </section>
+    </main>
+
+</body>
+</html>

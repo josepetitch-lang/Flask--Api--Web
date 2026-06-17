@@ -1,0 +1,3 @@
+# Que tendrá esta carpeta??
+
+Documentación de Flask, algunos proyectos personales (a los cuales me falta determinar el flujo, etc)
